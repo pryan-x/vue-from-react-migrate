@@ -1,0 +1,179 @@
+.homepage-carousel {
+    align-items: center;
+    padding: 15px 0 0 0;
+    min-height: 0;
+    width: 100%;
+}
+
+.carousel-header-container {
+    width: 100%;
+    margin-bottom: 5px;
+    /* border-bottom: #ebebeb 1px solid; */
+    border-bottom: #dedede 1px solid;
+}
+
+.carousel-header-text {
+    padding-left: 15px;
+    padding-bottom: 4px;
+    font-family: 'Lucida Grande', 'Noto Sans HK', Verdana, Arial, sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.carousel-container {
+    position: relative;
+    justify-content: center;
+    height: 100%;
+    width:95%;
+    max-width: 1110px;
+    overflow: hidden;
+    box-shadow: inset 0px 0px 4px 1px rgba(0, 0, 0, 0.1);
+}
+.carousel-list {
+    position: relative;
+    align-items: flex-end;
+    justify-content: center;
+    width: 100%;
+    will-change: transform; 
+}
+
+
+/* ~~ shared card styles ~~ */
+.carousel-card {
+    position: relative;
+
+    flex: 0 0 20%;
+    max-width: 20%;
+
+    padding: 8px;
+    box-sizing: border-box;
+}
+.carousel-card-img {
+    width: 100%;
+}
+.carousel-card-img-container {
+   justify-content: center;
+}
+.carousel-card-content-wrapper {
+    cursor: pointer;
+    /* *** */
+    box-shadow: 0px -2px 5px 1px rgba(0, 0, 0, 0.05);
+    /* *** */
+
+    box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    height: 100%;
+}
+.carousel-card-metadata {
+    justify-content: space-between;
+    min-height: 45px;
+    padding: 6px;
+    box-sizing: border-box;
+    border-top:unset;
+}
+
+.carousel-card-metadata-left {
+    justify-content: space-between;
+    height: 100%;
+    width: 100%;
+    min-width: 0;
+    margin-right: 4px;
+    box-sizing: border-box;
+}
+.carousel-card-metadata-right { 
+    align-items: center;
+    height: 100%;
+    width: 20%;
+    box-sizing: border-box;
+
+}
+.carousel-card-title {
+    /* font-family: 'Noto Sans HK', Verdana, Arial, sans-serif; */
+    /* font-family: 'Fira Sans', Verdana, Arial, sans-serif; */
+    /* font-family: 'Lucida Grande', 'Noto Sans HK', Verdana, Arial, sans-serif; */
+    /* font-family: 'Poppins'; */
+    font-family: 'Inter';
+    /* letter-spacing: .5px; */
+    /* font-family: 'Roboto'; */
+    /* font-family: 'Roboto Slab'; */
+    /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; */
+    font-size: 14px;
+    font-weight: 500;
+    line-height: normal;
+    padding-bottom: 1px;
+}
+.carousel-card-subtitle {
+    padding-top: 1px;
+    font-family: 'Inter';
+    font-size: 13px;
+    letter-spacing: .5px;
+    font-weight: 300;
+    line-height: normal;
+    color: #7f7f7f;
+}
+/* overflow text fix */
+.carousel-card-title, .carousel-card-subtitle  {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    height: 50%;
+}
+.carousel-card-rating {
+    text-align: right;
+    width: min-content;
+    /* font-family: 'Lucida Grande', 'Noto Sans HK', Verdana, Arial, sans-serif; */
+    /* font-family: Verdana, sans-serif; */
+    font-family: 'Open Sans';
+    letter-spacing: 1px;
+    /* font-family: 'Poppins'; */
+    /* font-family: 'Inter'; */
+    font-size: 13px;
+    font-weight: 600;
+    /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; */
+
+}
+.carousel-card-rating-text {
+    padding-bottom: 6px;
+    font-weight: 600;
+    text-align: center;
+    font-size: 11px;
+    /* font-family: 'Inter'; */
+    font-family: 'Open Sans';
+    /* font-family: 'Lucida Grande', 'Noto Sans HK', Verdana, Arial, sans-serif; */
+}
+
+
+
+/* CSS for JustTitle() */
+.carousel-custom-container {
+    /* click throughable */
+    pointer-events: none;
+
+    box-sizing: border-box;
+    position: absolute;
+    bottom: 0;
+    width: inherit;
+    left: 0;
+
+    padding: 8px;
+}
+.carousel-custom-container .carousel-card-metadata {
+    align-items: flex-end;
+    justify-content: center;
+    height: inherit;
+    width: inherit;
+    padding: 0 5px 4px;
+
+    background-image: url(/images/gradient.png);
+    background-position: left bottom;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    min-height: 30px;
+}
+.carousel-custom-container .carousel-card-title {
+    height: unset;
+    text-align:center;
+    font-size: 12px;
+    text-shadow: rgba(0,0,0,.8) 1px 1px 0;
+    color: white;
+}

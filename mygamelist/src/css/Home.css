@@ -1,0 +1,32 @@
+/* make media query at 1050 */
+
+.homepage-container {
+    align-items: unset;
+    justify-content: center;
+}
+.left-homepage {
+    align-items: center;
+    justify-content: flex-start;
+    box-sizing: border-box;
+
+    padding: 0 15px;
+    
+    width:75%;
+    min-width: 0;
+}
+.right-homepage {
+    justify-content: flex-start;
+    width:25%;
+    min-width: 200px;
+    max-width: 300px;
+    padding: 5px 15px 0;
+    border-left: #dedede 1px solid;
+}
+@media (max-width: 950px) {
+    .right-homepage {
+        display: none;
+    }
+    .left-homepage {
+        width: 100%;
+    }
+}

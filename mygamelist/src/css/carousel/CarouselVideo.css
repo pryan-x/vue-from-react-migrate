@@ -1,0 +1,140 @@
+.carousel-card.video .carousel-custom-container {
+    z-index: 3;
+    padding: unset;
+
+    transform: perspective(1px) translateZ(0);
+
+    /* transform: translateZ(0); */
+    backface-visibility: hidden;
+    transition: visibility 0.5s, opacity 0.5s ease-in-out;
+
+}
+.carousel-card.video .carousel-card-title{
+    pointer-events: all;
+}
+.carousel-card.video .carousel-card-title:hover {
+    text-decoration: underline;
+}
+
+.carousel-list.video {
+    align-items: center;
+    transform: translateX(30%);
+}
+
+.carousel-card.video {
+    align-items: center;
+    flex: 0 0 60%;
+    max-width: 60%;
+}
+.carousel-video-container {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    bottom: 0;
+    
+    overflow: hidden;
+    transition: all 0.5s ease;
+}
+
+.carousel-card.video .carousel-card-img {
+    pointer-events: none;
+    position: absolute;
+    height: 134%;
+    width: 100%;
+    top: -17%;
+    left: 0;
+    transition: opacity .4s ease;
+}
+
+.carousel-play-img-wrapper {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    top: 0;
+}
+
+.carousel-play-img {
+    z-index: 1;
+    width: 14%;
+    margin-left: 1px;
+
+    opacity: .5;
+    transition: all .5s ease;
+}
+.opacity-transition-play-icon{
+    animation: fill-opacity;
+    animation-timing-function: ease-in-out;
+
+    animation-duration: .3s;
+}
+@keyframes fill-opacity {
+    from {opacity: 0}
+    
+    to {opacity: .5}
+}
+
+
+.carousel-card.video .carousel-card-content-wrapper {
+    position: relative;
+    padding-top: 56.25%;
+    transform: scale3d(1, 1, 1);
+    transition: all .5s ease;
+}
+
+.shadow-image-fix {
+    pointer-events: none;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+
+    background-color: rgba(0, 0, 0, .2);
+    box-shadow: inset 0px 0px 25px 20px rgba(0, 0, 0, 0.5);
+    transition: box-shadow 0.5s ease, background-color 0.5s ease;
+}
+
+.nofocus:hover .carousel-play-img {
+    opacity: .9;
+    filter: drop-shadow(0px 0px 15px rgba(0, 0, 0, 0.5));
+}
+.nofocus:hover .shadow-image-fix{
+    box-shadow: inset 0px 0px 25px 20px rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0); 
+}
+.carousel-card.video .carousel-card-content-wrapper:hover {
+    transform: scale3d(1.015, 1.015, 1);
+}
+.carousel-card.video .carousel-card-content-wrapper.focused {
+    transform: scale3d(1.015, 1.015, 1);
+}
+.carousel-card-content-wrapper.focused .shadow-image-fix{
+    box-shadow: unset;
+    background-color: rgba(0, 0, 0, 0); 
+}
+
+
+.carousel-animation-active-right.video{
+    animation: shift-right-video;
+    animation-timing-function: ease-in-out;
+
+    animation-duration: .5s;
+}
+.carousel-animation-active-left.video{
+    animation: shift-left-video;
+    animation-timing-function: ease-in-out;
+
+    animation-duration: .5s;
+}
+@keyframes shift-left-video {
+    from {transform: translateX(30%)}
+    to {transform: translateX(90%)}
+}
+@keyframes shift-right-video {
+    from {transform: translateX(30%)}
+    to {transform: translateX(-30%)}
+}
