@@ -33,46 +33,44 @@
             } -->
         </div>
         <div class='flex-col right-homepage'>
-            yo
-            <!-- {topGamesOfThisYear &&
-                <RankList 
-                    listContent={topGamesOfThisYear.result} 
-                    listName={topGamesOfThisYear.name}
-                />
-            }
-            {topGamesOfLastYear &&
-                <RankList 
-                    listContent={topGamesOfLastYear.result} 
-                    listName={topGamesOfLastYear.name}
-                />
-            }
+            <RankList 
+                v-bind:listContent="topGamesOfThisYear.result"
+                v-bind:listName="topGamesOfThisYear.name"
+            />
 
-            {topRatedGames &&
-                <RankList 
-                    listContent={topRatedGames.result} 
-                    listName={topRatedGames.name}
-                />
-            } -->
+            <RankList 
+                v-bind:listContent="topGamesOfLastYear.result" 
+                v-bind:listName="topGamesOfLastYear.name"
+            />
+
+            <RankList 
+                v-bind:listContent="topRatedGames.result" 
+                v-bind:listName="topRatedGames.name"
+            />
         </div>
     </div>
 </template>
 
 <script>
-    // import PageHeader from '../fixed/PageHeader'
     // import Carousel from '../shared/carousel/Carousel'
-    // import RankList from '../shared/Ranklist'
+    import RankList from '../shared/Ranklist.vue'
 
     export default {
     name: 'Home',
     data() {
         return {
-            homepageData: {}
+            homepageData: {},
+            popularRecentReleases: [],
+            topUpcomingGames: [],
+            mostAnticipated: [],
+            popularTrailers: [],
+            topRatedGames: [],
+            topGamesOfLastYear: []
         }
     },
     components: {
-        // PageHeader,
         // Carousel,
-        // RankList
+        RankList
     },
     methods: {
         
@@ -81,10 +79,14 @@
 
     },
     async created () {
-        const x  = await this.$store.getters.homepageData
-        console.log(x)
-        this.homepageData = x
-    }
+        const resp = this.$store.getters.homepageData[0]
+        this.popularRecentReleases = resp[0]
+        this.topUpcomingGames = resp[1]
+        this.mostAnticipated = resp[2]
+        this.popularTrailers = resp[3]
+        this.topRatedGames = resp[resp.length-2]
+        this.topGamesOfLastYear = resp[resp.length-1]
+        }
 }
 </script>
 <style >
