@@ -3,7 +3,7 @@ const getFilterDate = () => {
     const beforeDate = new Date()
 
     // sets date to x amt of days before today
-    beforeDate.setDate(beforeDate.getDate() - 100)
+    beforeDate.setDate(beforeDate.getDate() - 120)
     // sets date to x amt of days after today
     afterDate.setDate(afterDate.getDate() + 60)
 

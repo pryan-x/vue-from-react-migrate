@@ -18,7 +18,8 @@
 
 .carousel-list.video {
     align-items: center;
-    transform: translateX(30%);
+    /* transform: translateX(30%); */
+    transform: translateX(15%);
 }
 
 .carousel-card.video {
@@ -131,10 +132,14 @@
     animation-duration: .5s;
 }
 @keyframes shift-left-video {
-    from {transform: translateX(30%)}
-    to {transform: translateX(90%)}
+    from {transform: translateX(15%)}
+    /* from {transform: translateX(30%)} */
+    /* to {transform: translateX(90%)} */
+    to {transform: translateX(45%)}
 }
 @keyframes shift-right-video {
-    from {transform: translateX(30%)}
-    to {transform: translateX(-30%)}
+    from {transform: translateX(15%)}
+    /* from {transform: translateX(30%)} */
+    /* to {transform: translateX(-30%)} */
+    to {transform: translateX(-15%)}
 }

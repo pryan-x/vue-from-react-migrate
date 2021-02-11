@@ -1,8 +1,5 @@
-import React from 'react';
-import '../../../css/carousel/LoadingSpinner.css'
-
-export default (props) => (
-    <div style={props.style} className='spinner-wrapper'>
+<template functional>
+  <div className='spinner-wrapper'>
         <div className="spinner" data-layer="4">
             <div>
                 <div className="spinner-container">
@@ -18,4 +15,12 @@ export default (props) => (
             </div>
         </div>
     </div>
-)
+</template>
+<script>
+export default {
+    name: 'Spinner'
+}
+</script>
+<style>
+    @import '../../../css/carousel/LoadingSpinner.css';
+</style>

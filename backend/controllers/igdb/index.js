@@ -30,7 +30,7 @@ const homepage = async (req, res) => {
     body = `
         query games "Popular Recent Releases" {
             fields name,rating,rating_count,follows,cover.image_id,genres.*,platforms.name;
-            where (first_release_date >= ${dateBeforeToday} & first_release_date <= ${todayUnix}) & hypes > 2 & version_parent = null & rating != null & rating_count > 5;
+            where (first_release_date >= ${dateBeforeToday} & first_release_date <= ${todayUnix}) & hypes > 0 & version_parent = null & rating != null & rating_count > 4;
             sort follows desc;
             limit 16;
         };

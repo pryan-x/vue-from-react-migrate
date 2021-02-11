@@ -13,23 +13,27 @@ rather than centering on height of image+metadata container */
     animation: shift-right;
     animation-timing-function: ease-in-out;
 
+    /* animation-duration: 20s; */
     animation-duration: .5s;
 }
 .carousel-animation-active-left.default{
     animation: shift-left;
     animation-timing-function: ease-in-out;
 
+    /* animation-duration: 20s; */
     animation-duration: .5s;
 }
 @keyframes shift-right {
     from {transform: translateX(0%)}
 
-    to {transform: translateX(-60%)}
+    to {transform: translateX(-30%)}
+    /* to {transform: translateX(-60%)} */
 }
 @keyframes shift-left {
     from {transform: translateX(0%)}
 
-    to {transform: translateX(60%)}
+    to {transform: translateX(30%)}
+    /* to {transform: translateX(60%)} */
 }
 
 

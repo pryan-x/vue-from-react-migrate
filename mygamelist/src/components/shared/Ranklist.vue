@@ -17,30 +17,31 @@
                 class='flex ranklist-item'
             >
                 <p class='ranklist-rank'>{{index+1}}</p>
-                <!-- <router-link class='ranklist-img-link' to={`/game/${item.id}`}> -->
+                <!-- <router-link class='ranklist-img-link' to={`/game/${game.id}`}> -->
                 <div class='ranklist-img-link' >
                 <img 
-                    src="https://images.igdb.com/igdb/image/upload/t_cover_small/${item.cover.image_id}.jpg" 
+                    v-if="game.cover.image_id != undefined"
+                    :src="imageUrl(game)"
                     alt='img'
                 />
                 </div>
                 <div class='flex-col ranklist-metadata'>
                     <div class='ranklist-title-wrapper'>
-                        <!-- <Link class='ranklist-title'  to={`/game/${item.id}`}> -->
+                        <!-- <Link class='ranklist-title'  to={`/game/${game.id}`}> -->
                         <div class='ranklist-title'>
-                            {{item.name}}
+                            {{game.name}}
                         </div>
                     </div>
                     <div class='flex-col ranklist-submetadata'>
-                        <p>{{formatPlatformList(item.platforms)}}</p>
+                        <p>{{formatPlatformList(game.platforms)}}</p>
                         <p class='ranklist-rating'>
                             Score: {{
-                                item.rating 
-                                    ? `${(item.rating/10).toFixed(2)} (${item.rating_count})` 
+                                game.rating 
+                                    ? `${(game.rating/10).toFixed(2)} (${game.rating_count})` 
                                     : 'TBD'
                             }}
                         </p>
-                        <p v-if='item.follows' class='ranklist-followers'>Followers: {{item.follows}}</p>
+                        <p v-if='game.follows' class='ranklist-followers'>Followers: {{game.follows}}</p>
                     </div>
                 </div>
             </div>
@@ -62,12 +63,11 @@
                 platform.name.includes(' (Microsoft Windows)') 
                 ? 'PC'
                 : platform.name
-                            // if(platform.name.includes(' (Microsoft Windows)')) {
-                            //     return 'PC'
-                            // }
-                            // return platform.name
-        )).join(', ')
-)}
+            )).join(', ')
+        )},
+        imageUrl(game) {
+            return `https://images.igdb.com/igdb/image/upload/t_cover_small/${game.cover.image_id}.jpg`
+        }
     },
     props: {
         listName : {
@@ -76,10 +76,7 @@
         listContent: {
             type: Array
         }
-    },
-    async created () {
-
-        }
+    }
 }
 </script>
 <style>

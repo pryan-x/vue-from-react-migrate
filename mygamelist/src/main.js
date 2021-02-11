@@ -4,7 +4,9 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 import router from './router'
 import store from './store'
-
+import VueYoutube from 'vue-youtube'
+ 
+Vue.use(VueYoutube)
 Vue.use(VueAxios, axios)
 Vue.axios.defaults.baseURL = "http://localhost:3001/api"
 
