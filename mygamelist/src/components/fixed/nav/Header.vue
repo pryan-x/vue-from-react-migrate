@@ -1,10 +1,7 @@
 <template>
   <div class="flex-col nav">
     <div class='flex nav-top'>
-      <TopNav v-bind:userProp="{
-          username: 'peepo',
-        }"
-      /> 
+      <TopNav/> 
     </div>
   </div>
 </template>

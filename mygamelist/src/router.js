@@ -1,19 +1,52 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import store from './store'
 
 Vue.use(Router)
 
 const router = new Router({
   mode: 'history',
   base: '/',
+  props: {
+    user : {
+      type: Object
+    }
+  },
   routes: [
-
     {
       path: '/',
       name: 'Home',
       component: () => import('@/components/screens/Home.vue'),
     },
+    {
+      path: '/login',
+      name: 'Login',
+      props: { authType: 'Login' },
+      component: () => import('@/components/screens/Auth.vue'),
+    }, 
+    {
+      path: '/signup',
+      name: 'Sign Up',
+      props: { authType: 'Sign Up' },
+      component: () => import('@/components/screens/Auth.vue'),
+    },
+    {
+      path: '/logout',
+      name: 'Logout',
+      component: () => import('@/components/screens/Logout.vue'),
+    },
   ]
+})
+router.beforeEach((to, from, next) => {
+  if( (to.name === 'Sign Up') || (to.name === 'Login') ) {
+    if (!store.getters.isLoggedIn) {
+      next()
+      return
+    }
+    next()
+  } else {
+    next() 
+  }
 })
 
 

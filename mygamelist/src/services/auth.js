@@ -1,47 +1,27 @@
 import api from './apiConfig'
 
-export const loginUser = async credentials => {
-    try {
-      const resp = await api.post('/auth/login', credentials)
-      console.log('Login finished: ', resp)
-
-      localStorage.setItem('token', resp.data.token)
-      // localStorage.setItem('user', resp.data.user)
-
-      localStorage.setItem('user', JSON.stringify(resp.data.user))
-      return resp.data
-    } catch (error) {
-      throw error
-    }
-  }
-
-  export const signUpUser = async credentials => {
-
-    try {
-      const resp = await api.post('/auth/signup', credentials)
-      // localStorage.setItem('token', resp.data.token)
-      console.log('Sign up finished: ', resp)
-      return resp.data
-    } catch (error) {
-      throw error
-    }
-  }
 
 export const authUser = async (type, credentials) => {
   if (type === 'Sign Up') {
     return await signUpUser(credentials).then(() => loginUser(credentials))
-
   } else {
     return loginUser(credentials)
   }
 }
+export const loginUser = async credentials => {
+  const resp = await api.post('/auth/login', credentials)
 
-export const signOutUser = async user => {
+  localStorage.setItem('token', resp.data.token)
+  localStorage.setItem('user', JSON.stringify(resp.data.user))
+  return resp.data
+}
+const signUpUser = async credentials => {
+  const resp = await api.post('/auth/signup', credentials)
+  return resp.data
+}
 
-    try {
-      await localStorage.clear()
-      return true
-    } catch (error) {
-      throw error
-    }
-  }
+export const signOutUser = () => {
+  console.log('logged out')
+  localStorage.removeItem('token')  
+  localStorage.removeItem('user')
+}

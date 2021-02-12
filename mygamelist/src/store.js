@@ -6,29 +6,34 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
-        homepageData: []
+        homepageData: [],
+        user: {}
     },
     mutations: {
         setHomepageData( state, data ) {
             state.homepageData = data
+        },
+        setUser( state, data ) {
+            state.user = data
         }
     },
     actions: {
         async getHomepageData({commit}) {
             try {
-                console.log('here')
                 const resp = await fetchHomepageGames()
-                console.log(resp)
                 commit('setHomepageData', resp)
               } catch(err) {
                 console.log(err.message)
               }
-        }
+        },
+        async getUser({commit}) {
+            let user = await JSON.parse(localStorage.getItem('user'))
+            commit('setUser', user)
+        },
     },
     getters : {
-        homepageData(state) {
-            console.log(state.homepageData)
-            return state.homepageData
-        }
+        homepageData: state => state.homepageData,
+        user: state => state.user,
+        isLoggedIn: state => !!state.user
     }  
 })

@@ -4,7 +4,7 @@
       <div class='flex-col page-background'>
         <PageHeader pageHeader='Welcome'/>
         <div class='page-container'>
-          <router-view />
+          <router-view :user='storedUser'/>
         </div>
       </div>
     <Footer />
@@ -18,13 +18,24 @@ import Footer from './components/fixed/Footer.vue'
 
 export default {
   name: 'App',
+  data() {
+    return {
+      user: undefined
+    }
+  },
   components: {
     Header,
     PageHeader,
     Footer
   },
+  computed: {
+    storedUser () {
+        return this.$store.state.user
+    }
+  },
   async created() {
     this.$store.dispatch('getHomepageData')
+    this.$store.dispatch('getUser')
   },
 }
 

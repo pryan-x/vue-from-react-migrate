@@ -1,8 +1,7 @@
 const bcrypt = require('bcrypt')
 const SALT_ROUNDS = process.env.SALT_ROUNDS
 
-const { findUserByName, createUser } = require('../../queries')
-const db = require('../../db')
+const User = require('../../models/Users.js')
 
 
 const signUp = async (req, res) => {
@@ -22,24 +21,10 @@ const signUp = async (req, res) => {
         if (password != password2) {
             errors.push( "Passwords do not match" )
         }
-
-        //query to check for row with username 
-        // let findUserByName = {
-        //     text: 
-        //         `SELECT * FROM users
-        //         WHERE username = $1`,
-        //     values: 
-        //         [username]
-        // }
         
-        db.query(findUserByName(username), (error, results) => {
-            if (error) {
-                throw error
-            }
-            // if (results.rows.length > 0) {
-            //     errors.push( "Username is already registered" )
-            // }
-            if (results.rows[0]) {
+        
+        User.findOne({ username: username }).then((results) => {
+            if (results) {
                 errors.push( "Username is already registered" )
             }
         })
@@ -47,27 +32,14 @@ const signUp = async (req, res) => {
         //11 salt rounds -> consider changing to 10
         const hashedPassword = await bcrypt.hash(password, parseInt(SALT_ROUNDS))
 
-        //query to create user
-        // createUser = {
-        //     text: 
-        //         `INSERT INTO users (username, password)
-        //         VALUES ($1, $2)
-        //         RETURNING id, password`,
-        //     values: 
-        //         [username, hashedPassword]
-        //     }
 
         // conditional to check if errors were found and to return them,
         // else create user
         if (errors.length > 0) {
             return res.status(400).json({ errors })
         } else {
-            db.query(createUser(username, hashedPassword), (error, results) => {
-                if (error) {
-                    throw error
-                } 
-                return res.status(201).json({ message: 'Success' })
-            })
+            new User({ username: username, password: hashedPassword}).save()
+            return res.status(201).json({ message: 'Success' })
         }
     } catch (error) {
 		console.log(

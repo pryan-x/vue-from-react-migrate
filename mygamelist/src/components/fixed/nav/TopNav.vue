@@ -32,7 +32,8 @@
                 </form>
             </div>
         </div>
-        <template v-if='logged'>
+        <template v-if='$store.getters.isLoggedIn'>
+        <!-- <template v-if='storedUser'> -->
             <div class="flex nav-top-right">
                 <div v-on:click="handleToggle" v-on:blur='handleBlur' tabIndex="0" class='flex nav-user-dropdown-button'>
                     <img
@@ -40,7 +41,7 @@
                         class='nav-pfp-PLACEHOLDER disable-select'
                         alt='img'
                     />
-                    <h3 class='nav-username disable-select'>{{user.username}}</h3>
+                    <h3 class='nav-username disable-select'>{{storedUser.username}}</h3>
                     <img
                         :src='profileDropdownCaret'
                         class='nav-caret disable-select'
@@ -63,22 +64,14 @@
                                 Reviews
                             </li>
                             <li>
-                                <!-- <router-link class='flex logout-button' to="/logout">
-                                    <h3 class='logout-text'>Logout</h3>
-                                    <img
-                                        :src='logoutIcon'
-                                        class='logout-icon'
-                                        alt='img'
-                                    />
-                                </router-link> -->
-                                <div v-on:click="handleLogged" class='flex logout-button' to="/logout">
-                                    <h3 class='logout-text'>Logout</h3>
-                                    <img
-                                        :src='logoutIcon'
-                                        class='logout-icon'
-                                        alt='img'
-                                    />
-                                </div>
+                            <router-link class='flex logout-button' to="/logout">
+                                <h3 class='logout-text'>Logout</h3>
+                                <img
+                                    :src='logoutIcon'
+                                    class='logout-icon'
+                                    alt='img'
+                                />
+                            </router-link>
                             </li>
                         </ul>
                     </template>
@@ -87,12 +80,9 @@
         </template>
         <template v-else>
             <div class="unauth-right-nav flex">
-                <!-- <router-link class='flex unauth-nav-button login' to="/login">
+                <router-link class='flex unauth-nav-button login' to="/login">
                     Login
-                </router-link> -->
-                <div v-on:mousedown="handleLogged" class='flex unauth-nav-button login' to="/login">
-                    Login
-                </div>
+                </router-link>
                 <router-link class='flex unauth-nav-button signup' to="/signup">
                     Sign Up
                 </router-link>
@@ -118,40 +108,33 @@
             profilePicturePlaceholder: profilePicturePlaceholder,
             titleLogoIcon: titleLogoIcon, 
             dropdown: false,
-            user: {},
-            logged: true,
+        }
+    },
+    computed: {
+        storedUser () {
+            return this.$store.state.user
         }
     },
     methods: {
-        handleToggle(){
+        handleToggle() {
             this.dropdown = !this.dropdown
             console.log('dropdown toggled')
         },
-        handleLogged(){
-            this.logged = !this.logged
-            console.log('logged: ', this.logged)
-        },
-        handleBlur(e){
+        // handleLogout() {
+        //     this.$store.commit('setUser', false)
+        //     signOutUser()
+        // },
+        handleBlur(e) {
             const currentTarget = e.currentTarget;
             setTimeout(() => {
                 if (!currentTarget.contains(document.activeElement)) {
                 this.dropdown = false
                 }
-                console.log('dropdown toggled')
             }, 0)
         }
-    },
-    props: {
-        userProp: {
-            type: Object
-        }, 
-    },
-    mounted() {
-        this.user = this.userProp;
     }
 }
 </script>
 <style >
   @import '../../../css/nav/TopNav.css';
-
 </style>
