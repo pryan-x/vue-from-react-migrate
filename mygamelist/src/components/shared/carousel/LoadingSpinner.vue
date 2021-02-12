@@ -1,14 +1,20 @@
-<template functional>
-  <div className='spinner-wrapper'>
-        <div className="spinner" data-layer="4">
+<template>
+  <div 
+    :style='`display: ${videoLoaded 
+       ? `none`
+       : `block`
+    }`' 
+    class='spinner-wrapper'
+  >
+        <div class="spinner" data-layer="4">
             <div>
-                <div className="spinner-container">
-                    <div className="spinner-rotator">
-                        <div className="spinner-left">
-                            <div className="spinner-circle"></div>
+                <div class="spinner-container">
+                    <div class="spinner-rotator">
+                        <div class="spinner-left">
+                            <div class="spinner-circle"></div>
                         </div>
-                        <div className="spinner-right">
-                            <div className="spinner-circle"></div>
+                        <div class="spinner-right">
+                            <div class="spinner-circle"></div>
                         </div>
                     </div>
                 </div>
@@ -18,7 +24,12 @@
 </template>
 <script>
 export default {
-    name: 'Spinner'
+    name: 'Spinner',
+    props: {
+        videoLoaded : {
+            type: Boolean
+        }
+    }
 }
 </script>
 <style>

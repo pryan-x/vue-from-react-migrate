@@ -5,17 +5,11 @@
                 {{ carouselTitle }}
             </p>
         </div>
-            <!-- class="flex-col carousel-container" -->
-        <div 
-            :class="`flex-col carousel-container ${carouselTypeCheck}`"
-        >
-                <!-- shiftCarousel={this.shiftCarousel} -->
+        <div :class="`flex-col carousel-container ${carouselTypeCheck}`">
             <CarouselCaret 
                 direction='left'
                 @click.native="shiftCarousel($event)"
             />
-
-                <!-- shiftCarousel={this.shiftCarousel} -->
             <CarouselCaret 
                 direction='right'
                 @click.native="shiftCarousel($event)"
@@ -65,16 +59,9 @@
     },
     data() {
         return {
-            // carouselHandlers: {
-            //     this.shiftCarousel,
-            //     this.focusVideo,
-            //     this.handleVideoLoad,
-            //     this.setPlaying,
-            // },
-
             content: [],
 
-            // animation states
+            // animation state
             carouselShiftAnimation: null,
             centerVideoIndex: null,
             videoFocused: null,
@@ -83,10 +70,9 @@
 
             // video playback check
             playing: false,
-            //** timeout check for whether video will be playing in xxxms
+            //** timeout check for whether video is playing in xxxms
             queuedToPlay: false,
             //**  
-            prevPlaying: false
         }
     },
     props: {
@@ -106,13 +92,6 @@
     computed: {
         carouselTypeCheck() {
             return this.carouselType ? this.carouselType : 'default'
-        }
-    },
-    watch:{
-        playing(newVal, oldVal){
-            if(oldVal != newVal) {
-                this.prevPlaying = oldVal
-            }
         }
     },
     methods: {
@@ -140,9 +119,9 @@
                 this.playing = false
             }
             // If left or right thumbnail is clicked during animation: video is queued to focus after finished.
-            if ((this.state.preFocusIndex !== arrIndex) 
-                && (arrIndex !== this.state.centerVideoIndex) 
-                && this.state.carouselShiftAnimation) 
+            if ((this.preFocusIndex !== arrIndex) 
+                && (arrIndex !== this.centerVideoIndex) 
+                && this.carouselShiftAnimation) 
             {
                 this.preFocusIndex = arrIndex
             }
@@ -151,25 +130,22 @@
             this.videoLoaded = true
         },
         setPlaying(play) {
-            // play
-            if (play) {
-                this.playing = play,
-                // queuedtoplay gets set true ONLY IF the timeout for pause has not run yet and playing is still set to true from playing again quickly after pausing(to smooth play+pause transitions)
-                this.queuedToPlay = this.prevPlaying
-                // this.setState(prevState =>({ 
-                //     playing: play,
-                //     queuedToPlay: prevState.playing
-                // })) 
-            }
-            // pause
+            // on pause
             if(!play) {
                 setTimeout(() => {
                     // if queuedtoplay is false, pause
-                    // if true, keep this.state.playing unchanged as true to keep pause transitions from running when playing
-                    this.playing = this.queuedToPlay,
+                    // if true, keep this.playing unchanged as true to keep pause transitions from running when playing
+                    this.playing = this.queuedToPlay
                     this.queuedToPlay = false
                 }, 500)
             }
+            // on play
+            if (play) {
+                // queuedtoplay gets set true ONLY IF the timeout for pause has not run yet and playing is still set to true from playing again before pause timeout fires(to smooth play+pause transitions)
+                this.queuedToPlay = this.playing ? true : false
+                this.playing = play
+            }
+
         },
         shift(arr, direction, jumps) {
             const shiftedArr = [...arr]
@@ -194,8 +170,9 @@
             var shiftRightOrLeft = directionToShift.includes('right')
 
             this.carouselShiftAnimation = shiftRightOrLeft ? 'right' : 'left',
-            this.preFocusIndex= null
-            this.playing= false
+            this.preFocusIndex = null
+            this.playing = false
+            this.queuedToPlay = false
 
             setTimeout(() => {
                 // reset animation and values after animation is done
@@ -210,39 +187,14 @@
                     
                 this.preFocusIndex = null
                 this.videoLoaded = false
-
-                // this.setState(prevState => {
-                //     return {
-                //         // reorders the carousel content to match the animation shift
-                //         content: shiftRightOrLeft
-                //             ? this.shift(prevState.content, 'r', prevState.jumps) 
-                //             : this.shift(prevState.content, 'l', prevState.jumps),
-                //         // sets the video focus to null (reset) or the new center video if the shifted video was queued before animation finished
-                //         videoFocused: prevState.preFocusIndex === null 
-                //             ? null
-                //             : prevState.centerVideoIndex,
-                //         // resets animation
-                //         carouselShiftAnimation: null,
-                            
-                //         preFocusIndex: null,
-                //         videoLoaded: false,
-                //     }
-                // })
-            // for animation and carousel content change to match up, timeout has to be a little under timing as the keyframes timing for the shift animation
-            // }, 19500)
-
             }, 500)
             // }, 475)
             // }, 460)
-            // }, 15000)
-            // }, 5000)
-            // }, 40000)
-            // })
         }
     },
     created() {
         this.reorderArrForCarousel()
-    },
+    }
 }
 </script>
 <style >

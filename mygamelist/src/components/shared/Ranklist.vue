@@ -1,13 +1,9 @@
 <template>
     <div class='flex-col ranklist-container'>
         <div class='flex ranklist-header-container'>
-            <p class='ranklist-header'>{{listName}}</p>
+            <p class='ranklist-header'>{{ listName }}</p>
             <p class='ranklist-header-expand-link'>More</p>
         </div>
-         <!-- v-for='(post, index) in postsReverse'
-      v-bind:item='post'
-      v-bind:index='index'
-      v-bind:key='post._id' -->
         <div class='flex-col ranklist-list-container'>
             <div 
                 v-for='(game, index) in listContent'
@@ -16,7 +12,7 @@
                 v-bind:key='game.id'
                 class='flex ranklist-item'
             >
-                <p class='ranklist-rank'>{{index+1}}</p>
+                <p class='ranklist-rank'>{{ index+1 }}</p>
                 <!-- <router-link class='ranklist-img-link' to={`/game/${game.id}`}> -->
                 <div class='ranklist-img-link' >
                 <img 
@@ -33,7 +29,7 @@
                         </div>
                     </div>
                     <div class='flex-col ranklist-submetadata'>
-                        <p>{{formatPlatformList(game.platforms)}}</p>
+                        <p>{{ formatPlatformList(game.platforms) }}</p>
                         <p class='ranklist-rating'>
                             Score: {{
                                 game.rating 
@@ -41,7 +37,7 @@
                                     : 'TBD'
                             }}
                         </p>
-                        <p v-if='game.follows' class='ranklist-followers'>Followers: {{game.follows}}</p>
+                        <p v-if='game.follows' class='ranklist-followers'>Followers: {{ game.follows }}</p>
                     </div>
                 </div>
             </div>
@@ -58,13 +54,13 @@
         }
     },
     methods: {
-        formatPlatformList(list){(
-            list.map((platform) => (
+        formatPlatformList(list){
+            return list.map((platform) => (
                 platform.name.includes(' (Microsoft Windows)') 
                 ? 'PC'
                 : platform.name
             )).join(', ')
-        )},
+        },
         imageUrl(game) {
             return `https://images.igdb.com/igdb/image/upload/t_cover_small/${game.cover.image_id}.jpg`
         }

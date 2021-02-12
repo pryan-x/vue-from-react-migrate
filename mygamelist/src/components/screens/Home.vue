@@ -1,7 +1,6 @@
 <template>
     <div class='flex homepage-container'>
         <div class='flex-col left-homepage'>
-
             <Carousel 
                 v-if="popularRecentReleases != undefined"
                 :carouselContent='popularRecentReleases.result'
@@ -22,7 +21,6 @@
                 :carouselJumps='2'
                 carouselType='smaller'
             /> 
-            <!-- <youtube video-id="fn8fXI8MjT8" ref="youtube"></youtube> -->
             <Carousel 
                 v-if="popularTrailers != undefined"
                 :carouselContent='popularTrailers.result'
@@ -32,7 +30,6 @@
             /> 
         </div>
         <div class='flex-col right-homepage'>
-            <!-- <template v-if="rawHomepageData.length > 0"> -->
             <RankList v-if="topGamesOfLastYear != undefined"
                 :listContent="topGamesOfLastYear.result" 
                 :listName="topGamesOfLastYear.name"
@@ -41,7 +38,6 @@
                 :listContent="topRatedGames.result" 
                 :listName="topRatedGames.name"
             />
-            <!-- </template> -->
         </div>
     </div>
 </template>
@@ -55,9 +51,6 @@
     components: {
         Carousel,
         RankList
-    },
-    methods: {
-        
     },
     computed: {
         rawHomepageData () {
@@ -81,14 +74,7 @@
         topRatedGames () {
             return this.rawHomepageData[this.rawHomepageData.length-2]
         }
-        // topGamesOfLastYear () {
-        //     return this.rawHomepageData[this.rawHomepageData.length-1]
-        // }
-    },
-
-    props: {
-
-    },
+    }
 }
 </script>
 <style >

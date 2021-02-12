@@ -1,7 +1,7 @@
 <template>
   <div class='flex page-header'>
         <p class='page-name-text'>
-        {{pageHeader}}
+        {{ pageHeader }}
         </p>
     </div>
 </template>

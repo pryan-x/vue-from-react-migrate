@@ -14,11 +14,9 @@ import TopNav from './TopNav.vue';
 
 export default {
   name: 'Header',
-
   components: {
     TopNav
-  },
-
+  }
 }
 </script>
 <style>
